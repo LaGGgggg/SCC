@@ -1,0 +1,101 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "C:/Users/Poni2/Desktop/python work/mprs_work/SCC/main.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": true
+  },
+  {
+   "optionDest": "console",
+   "value": false
+  },
+  {
+   "optionDest": "ascii",
+   "value": false
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "embed_manifest",
+   "value": true
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": false
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "win_private_assemblies",
+   "value": false
+  },
+  {
+   "optionDest": "win_no_prefer_redirects",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Poni2/Desktop/python work/mprs_work/SCC/app_dataclasses.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Poni2/Desktop/python work/mprs_work/SCC/constants.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Poni2/Desktop/python work/mprs_work/SCC/constants_level_1_figures.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Poni2/Desktop/python work/mprs_work/SCC/constants_level_2_figures.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Poni2/Desktop/python work/mprs_work/SCC/constants_level_3_figures.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Poni2/Desktop/python work/mprs_work/SCC/help_classes.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Poni2/Desktop/python work/mprs_work/SCC/help_functions.py;."
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}
