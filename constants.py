@@ -1,5 +1,4 @@
-from app_dataclasses import Color, AdditionalLine, Figures, Texts, Level, Levels
-from help_classes import Figure
+from app_dataclasses import Color, Figures, Texts, Level, Levels
 import constants_level_1_figures, constants_level_2_figures, constants_level_3_figures, constants_level_4_figures
 import constants_level_5_figures, constants_level_6_figures, constants_level_7_figures, constants_level_8_figures
 import constants_level_9_figures, constants_level_10_figures, constants_level_11_figures, constants_level_12_figures
@@ -14,87 +13,6 @@ VIOLET = Color(174, 0, 255)
 
 THICKNESS_DEFAULT = 4
 THICKNESS_WIDE = 5
-
-__CUBE_SIDE = 4
-
-CUBE = Figure(
-    vertices=(
-        (0, 0, 0), (__CUBE_SIDE, 0, 0), (__CUBE_SIDE, __CUBE_SIDE, 0), (0, __CUBE_SIDE, 0), (0, 0, __CUBE_SIDE),
-        (__CUBE_SIDE, 0, __CUBE_SIDE), (__CUBE_SIDE, __CUBE_SIDE, __CUBE_SIDE), (0, __CUBE_SIDE, __CUBE_SIDE),
-        (-2, -2, -2), (-3, -3, -3),
-    ),
-    vertices_names=('A', 'B', 'C', 'D', 'A1', 'B1', 'C1', 'D1'),
-    faces=(
-        (0, 1, 2, 3),  # A1B1C1D1
-        (5, 4, 7, 6),  # ABCD
-        (4, 0, 3, 7),  # AA1DD1
-        (1, 5, 6, 2),  # BB1CC1
-        (4, 5, 1, 0),  # DD1CC1
-        (3, 2, 6, 7),  # AA1BB1
-    ),
-    additional_lines=(
-        AdditionalLine(1, 9, [1, 2, 5]),
-    )
-)
-
-CUBE_2 = Figure(
-    vertices=(
-        (0, 0, 0), (__CUBE_SIDE, 0, 0), (__CUBE_SIDE, __CUBE_SIDE, 0), (0, __CUBE_SIDE, 0), (0, 0, __CUBE_SIDE),
-        (__CUBE_SIDE, 0, __CUBE_SIDE), (__CUBE_SIDE, __CUBE_SIDE, __CUBE_SIDE), (0, __CUBE_SIDE, __CUBE_SIDE),
-    ),
-    vertices_names=('A', 'B', 'C', 'D', 'A1', 'B1', 'C1', 'D1'),
-    faces=(
-        (0, 1, 2, 3),
-        (5, 4, 7, 6),
-        (4, 0, 3, 7),
-        (1, 5, 6, 2),
-        (4, 5, 1, 0),
-        (3, 2, 6, 7),
-    ),
-    additional_lines=(
-        AdditionalLine(0, 5, [0]),
-        AdditionalLine(1, 4, [1]),
-        AdditionalLine(3, 5, [3], True),
-        AdditionalLine(3, 6, [3]),
-    ),
-)
-
-__PRISM_SIDE = 2
-__PRISM_HEIGHT = 3
-
-PRISM = Figure(
-    vertices=(
-        (0, 0, 0), (0, __PRISM_HEIGHT, 0), (3**0.5 / 2 * __PRISM_SIDE, __PRISM_HEIGHT, 0.5 * __PRISM_SIDE),
-        (3**0.5 / 2 * __PRISM_SIDE, 0, 0.5 * __PRISM_SIDE), (0, 0, __PRISM_SIDE), (0, __PRISM_HEIGHT, __PRISM_SIDE),
-    ),
-    vertices_names=('A', 'B', 'C', 'A1', 'B1', 'C1'),
-    faces=(
-        (0, 1, 2, 3),
-        (5, 4, 3, 2),
-        (4, 0, 3),
-        (1, 5, 2),
-        (4, 5, 1, 0),
-    ),
-)
-
-PRISM_MODDED = Figure(
-    vertices=(
-        (0, 0, 0), (0, __PRISM_HEIGHT, 0), (3**0.5 / 2 * __PRISM_SIDE, __PRISM_HEIGHT, 0.5 * __PRISM_SIDE),
-        (3**0.5 / 2 * __PRISM_SIDE, 0, 0.5 * __PRISM_SIDE), (0, 0, __PRISM_SIDE), (0, __PRISM_HEIGHT, __PRISM_SIDE),
-        (-2, -2, -2),
-    ),
-    vertices_names=('A', 'B', 'C', 'A1', 'B1', 'C1'),
-    faces=(
-        (0, 1, 2, 3),
-        (5, 4, 3, 2),
-        (4, 0, 3),
-        (1, 5, 2),
-        (4, 5, 1, 0),
-    ),
-    additional_lines=(
-        AdditionalLine(0, 6, [1, 3]),
-    ),
-)
 
 LEVELS = Levels({
     1: Level(
@@ -286,7 +204,7 @@ LEVELS = Levels({
             ' {%render_small_image#static/level_7/3_small.png%} = {%render_image#static/level_7/4.png%}. Вычислим'
             ' косинус угла θ между векторами {%render_small_image#static/level_7/2_small.png%} и'
             ' {%render_small_image#static/level_7/3_small.png%}: cosθ = {%render_image#static/level_7/5.png%} ='
-            ' {%render_image#static/level_7/6.png%} = {%render_image#static/level_7/7.png%}. Найдём синус угла'
+            ' {%render_big_image#static/level_7/6_big.png%} = {%render_image#static/level_7/7.png%}. Найдём синус угла'
             ' θ: sinθ = {%render_small_image#static/level_7/8_small.png%} = {%render_image#static/level_7/9.png%}.'
             ' Вычислим расстояние'
             ' от точки E до прямой B↓1C↓1: p(E, B↓1 C↓1) = {%render_small_image#static/level_7/10_small.png%} ='

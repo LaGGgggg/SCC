@@ -2,12 +2,13 @@ from typing import Iterable
 from sys import exit
 
 import pygame
+from pygame_widgets import update as pygame_widgets_update
+from pygame_widgets.button import Button, ButtonArray
 from numpy import cross, linalg
 from shapely.geometry import Polygon, LineString
 
 from constants import X, Y, Z, BLACK, WHITE, BLUE, LEVELS, THICKNESS_DEFAULT, THICKNESS_WIDE
 from help_classes import Point
-from help_functions import get_current_level
 from app_dataclasses import Color
 
 
@@ -19,7 +20,6 @@ class Main:
             main_color: Color,
             debug: bool = False,
             debug_colors: bool = False,
-            debug_level_shift: int = 0,
     ) -> None:
 
         self.background_color = background_color
@@ -43,27 +43,25 @@ class Main:
             pygame.K_u: self.__move_to_next_level_stage_or_level,
         }
 
-        initial_screen_size = (900, 900)
-
         pygame.init()
 
         self.__font = pygame.font.SysFont('Times New Roman', 24)
         self.__small_font = pygame.font.SysFont('Times New Roman', 10)
 
-        pygame.display.set_caption('Control -   w, s : X    a, d : Y    q, e : Z')
+        pygame.display.set_caption('Control -   w, s : X    a, d : Y    q, e : Z   u: next')
 
         self.__clock = pygame.time.Clock()
 
-        self.__screen = pygame.display.set_mode(initial_screen_size, pygame.RESIZABLE)
+        self.__screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE, pygame.FULLSCREEN)
 
-        self.__levels = get_current_level(LEVELS)
-
-        for _ in range(debug_level_shift):
-            next(self.__levels)
+        self.__levels = LEVELS.levels
 
         self.__current_level = None
+        self.__current_level_index = 0
         self.__current_level_stage = None
         self.__level_stage_text = None
+
+        self.__is_menu = True
 
         self.__mainloop()
 
@@ -76,7 +74,9 @@ class Main:
 
     def __handle_events(self) -> None:
 
-        for event in pygame.event.get():
+        self.__events = pygame.event.get()
+
+        for event in self.__events:
 
             if event.type == pygame.QUIT:
                 exit()
@@ -609,9 +609,15 @@ class Main:
         self.__move_to_next_level_stage_text()
         self.__move_to_next_level_stage_shape()
 
-    def __move_to_next_level(self) -> None:
+    def __move_to_next_level(self, new_level_index: int | None = None) -> None:
 
-        self.__current_level = next(self.__levels)
+        if new_level_index:
+            self.__current_level_index = new_level_index
+
+        else:
+            self.__current_level_index += 1
+
+        self.__current_level = self.__levels.get(self.__current_level_index, None)
 
         if self.__current_level is None:
             exit()
@@ -634,6 +640,35 @@ class Main:
         else:
             self.__move_to_next_level_stage()
 
+    def __render_menu(self) -> None:
+
+        self.menu_button = None
+
+        _ = ButtonArray(
+            self.__screen,
+            0,
+            0,
+            self.__screen.get_width(),
+            self.__screen.get_height(),
+            (4, 3),
+            texts=[str(i + 1) for i in range(len(self.__levels))],
+            inactiveColours=[(240, 240, 240) for _ in self.__levels],
+            hoverColours=[(220, 220, 220) for _ in self.__levels],
+            colour=(255, 255, 255),
+            onClicks=[self.__update_status_to_level for _ in self.__levels],
+            onClickParams=[(i,) for i in range(len(self.__levels))],
+        )
+
+        pygame_widgets_update(pygame.event.get())
+
+    def __update_status_to_menu(self) -> None:
+        self.__is_menu = True
+
+    def __update_status_to_level(self, new_level_index: int) -> None:
+
+        self.__is_menu = False
+        self.__move_to_next_level(new_level_index)
+
     def __mainloop(self) -> None:
 
         self.__move_to_next_level()
@@ -644,12 +679,30 @@ class Main:
 
             self.__screen.fill(self.background_color.get())
 
-            self.__draw_shape()
-            self.__draw_text_handler()
+            if not self.__is_menu:
 
-            pygame.display.flip()
+                self.menu_button = Button(
+                    self.__screen,
+                    0,
+                    self.__screen.get_height() - 50,
+                    100,
+                    50,
+                    text='Меню',
+                    inactiveColour=(240, 240, 240),
+                    hoverColour=(220, 220, 220),
+                    onClick=self.__update_status_to_menu,
+                )
+
+                self.__draw_shape()
+                self.__draw_text_handler()
+
+            else:
+                self.__render_menu()
+
+            pygame_widgets_update(self.__events)
+            pygame.display.update()
             self.__clock.tick(40)
 
 
 if __name__ == '__main__':
-    Main(WHITE, BLACK, debug=False, debug_colors=False, debug_level_shift=11)
+    Main(WHITE, BLACK, debug=False, debug_colors=False)

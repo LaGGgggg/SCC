@@ -17,10 +17,3 @@ def rotation_matrix(a: int, b: int, y: int) -> Matrix:
         (ca * sy + sa * sb * cy, ca * cy - sy * sa * sb, -cb * sa),
         (sy * sa - ca * sb * cy, ca * sy * sb + sa * cy, ca * cb),
     ))
-
-
-def get_current_level(levels: Levels):
-    for level in levels.levels.values():
-        yield level
-
-    yield None
