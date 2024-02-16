@@ -4,9 +4,11 @@
 
 # Самоучитель по векторно-координатному способу решения стереометрических задач
 
-<img src="_media/1.png" width="600">
-<img src="_media/2.png" width="600">
-<img src="_media/3.png" width="600">
+<p align="center">
+  <img src="_media/1.png" width="600">
+  <img src="_media/2.png" width="600">
+  <img src="_media/3.png" width="600">
+</p>
 
 # Как запустить проект?
 
